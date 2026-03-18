@@ -1,8 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
 
-express.json() // Middleware to parse JSON bodies
+app.use(express.json()); // Middleware to parse JSON bodies
 app.use(cors()); // Enable CORS for all routes
 
 app.get('/', (req, res) => {
@@ -35,6 +36,6 @@ app.get('/recipes', (req, res) => {
     })
 })
 
-app.listen(8080, () => {
-    console.log('server listening on port 8080')
+app.listen(process.env.PORT || 8080, () => {
+    console.log('server listening on port ' + (process.env.PORT || 8080))
 })

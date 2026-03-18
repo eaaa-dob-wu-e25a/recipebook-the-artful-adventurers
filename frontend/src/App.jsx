@@ -1,8 +1,9 @@
 import axios from 'axios';
 import './App.css' 
-import RecipeList from './components/RecipeList';
+import RecipeListPage from './pages/RecipeListPage';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
-url = process.env.REACT_APP_API_URL
+const url = process.env.REACT_APP_API_URL
 
 const apiCall = () => {
   axios.get(url).then((data) => {
@@ -12,17 +13,17 @@ const apiCall = () => {
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <BrowserRouter>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/recipes">Recipes</Link>
+      </nav>
 
-        <button onClick={apiCall}>Make API Call</button>
-
-        <RecipeList />
-
-
-
-      </header>
-    </div>
+      <Routes>
+        <Route path="/" element={<h1>Welcome to RecipeBook</h1>} />
+        <Route path="/recipes" element={<RecipeListPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
